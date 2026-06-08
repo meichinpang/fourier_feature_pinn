@@ -1,8 +1,21 @@
 # Fourier Feature PINN for a Damped Pendulum
 
-This repository implements a **hybrid Physics-Informed Neural Network (PINN)** that combines ODE-based physics constraints with noisy experimental observations to solve the damped pendulum equation:
+This repository implements a **Hybrid Physics-Informed Neural Network (PINN)** that combines ODE-based physics constraints with noisy, sparse and missing experimental observations to solve the damped pendulum equation:
 
-$$\frac{d^2\theta}{dt^2} + \frac{b}{m}\,\frac{d\theta}{dt} + \frac{g}{L}\sin\!\bigl(\theta(t)\bigr) = 0$$
+$$
+\boxed{\frac{d^2\theta}{dt^2} + \frac{b}{m}\,\frac{d\theta}{dt} + \frac{g}{L}\sin\!\bigl(\theta(t)\bigr) = 0}
+$$
+
+| Parameter                  | Symbol           |         Value | Unit  |
+| -------------------------- | ---------------- | ------------: | ----- |
+| Gravitational acceleration | $g$              |          9.81 | m/s²  |
+| Pendulum length            | $L$              |           1.0 | m     |
+| Mass                       | $m$              |           1.0 | kg    |
+| Damping coefficient        | $b$              |          0.25 | kg/s  |
+| Initial angle              | $\theta_0$       | $\pi/4$ (45°) | rad   |
+| Initial angular velocity   | $\omega_0$       |           0.0 | rad/s |
+| Start time                 | $t_\text{start}$ |             0 | s     |
+| End time                   | $t_\text{end}$   |            20 | s     |
 
 Two architectures are compared:
 
