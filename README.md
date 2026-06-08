@@ -3,7 +3,7 @@
 This repository implements a **Hybrid Physics-Informed Neural Network (PINN)** that combines ODE-based physics constraints with noisy, sparse and missing experimental observations to solve the damped pendulum equation:
 
 $$
-\boxed{\frac{d^2\theta}{dt^2} + \frac{b}{m}\,\frac{d\theta}{dt} + \frac{g}{L}\sin\!\bigl(\theta(t)\bigr) = 0}
+\boxed{\frac{d^2\theta}{dt^2} + \frac{b}{m}\frac{d\theta}{dt} + \frac{g}{L}\sin\bigl(\theta(t)\bigr) = 0}
 $$
 
 | Parameter                  | Symbol           |         Value | Unit  |
