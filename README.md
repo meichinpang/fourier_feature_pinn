@@ -1,4 +1,4 @@
-# Fourier Feature PINN for a Damped Pendulum
+# Fourier Feature Hybrid PINN for a Damped Pendulum
 
 This repository implements a **Hybrid Physics-Informed Neural Network (PINN)** that combines ODE-based physics constraints with noisy, sparse and missing experimental observations to solve the damped pendulum equation:
 
