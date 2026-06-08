@@ -122,7 +122,7 @@ The baseline uses a fully connected network with `Tanh` activations. Only Scenar
 | $\lambda_\text{data}$ |                         1 |                          1 |
 | Optimizer             |                      Adam |                       Adam |
 
-## Fourier Feature PINN Hyperparameters
+## Hybrid Fourier Feature PINN Hyperparameters
 
 The Fourier feature PINN replaces the first linear layer with a frozen sinusoidal embedding using five physics-informed frequency bands derived from the natural frequency $\omega_n = \sqrt{g/L} \approx 3.13$ rad/s:
 
@@ -167,11 +167,11 @@ The input dimension becomes $1 + 2K = 11$ (1 normalized time + 5 sin/cos pairs).
 | $\lambda_\text{phys}$ |                  1 |                 10 |                   1 |                         10 |
 | $\lambda_\text{data}$ |                  1 |                  1 |                  10 |                          1 |
 
-Key tuning rationale:
+Key tuning rationale for each scenario:
 
-- **Scenario 2 (Noisy):** $\lambda_\text{phys} = 10$ forces the ODE to dominate over noisy observations.
-- **Scenario 3 (Sparse):** $\lambda_\text{data} = 10$ amplifies the limited data to extract maximum information from 75 points.
-- **Scenario 4 (Extrapolation):** $\lambda_\text{phys} = 10$ drives physics-only prediction in the $[10, 20]$ s region where no data exists.
+* Due to the increase in the noise level ($\sigma = 0.1\;\text{rad}$) in Scenario (2), we increase the physics loss weight to 10 ($\lambda_\text{phys} = 10$) so that physics loss becomes more dominant to prevent fitting noisy scatter points. 
+* In Scenario (3), we can trust the measurements by increasing data loss weight to 10 ($\lambda_\text{data} = 10$) as the data points are sparse but trustworthy ($\sigma = 0.001\;\text{rad}$). 
+* In Scenario (4) where data covers only [0, 10] s (first ~5 oscillations), the PINN must predict [10, 20] s purely from physics. Therefore, we raise $\lambda_\text{phys}$ to 10 because there are zero data anchors beyond the first five oscillations. Here, the data-free region is entirely physics-driven due to available collocation points, where the ODE residual is the only constraint keeping the solution on track.
 
 ## References
 
